@@ -1,0 +1,41 @@
+spring:
+  profiles:
+    active: localBatch
+server:
+  # this can be overridden on the command line with
+  # java -jar -Dserver.port=717# target/batch-0.0.1-SNAPSHOT.jar
+  port: 7175
+---
+spring:
+  config:
+    activate:
+      on-profile: localBatch
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://192.168.99.108:5438/pgbatchdb
+    username: postgres
+    password: Password#1
+    driverClassName: org.postgresql.Driver
+    continue-on-error: true
+
+  batch:
+    job:
+      names:
+        "printJob"
+
+  jpa:
+    database: postgresql
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          batch_size: 20
+        cache:
+          use_query_cache: false
+          use_second_level_cache: false
+          use_structured_entries: false
+          use_minimal_puts: false
