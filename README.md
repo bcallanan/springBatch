@@ -12,7 +12,7 @@ There are Jobs(transactions) and Steps(n) involved in many aspects of data proce
  - Chunk-Oriented Steps: (Chunk steps) - this would be an example of processing a large import file. A tasklet step could also be in the form of a chunk step.
  
  	- chunk size: It is not practical to process the entire import file. Therefore the file is processed in a chunk-by-chunk fashion. 
-	- input type(s): events(kafka), csv, etc
+	- input type(s): events, csv, etc
 	- Chunk Step has 3 defined parts, definition:
  		- item reader: consume to produce
  		- item processor(optional): Business logic transaction processing
@@ -23,6 +23,6 @@ There are Jobs(transactions) and Steps(n) involved in many aspects of data proce
 Execution Context: Map of Metadata KV Pairs for persisted state of the execution.
   	
 In SpringBatch there are two execution contexts:
-  1) Step scope context - StepExecution object
+  1) Step scope context - StepExecution object -
   1) Job scope context - JobExecution object - provides inter-step communication or values/variables from step-2-step.  
 

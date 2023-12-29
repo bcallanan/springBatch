@@ -48,7 +48,7 @@ public class ChunkJobConfig {
     private ChunkExecutionListener chunkListener;
 
     @Autowired
-    private BatchItemReader itemReader;
+    private BatchItemReader<?> itemReader;
 
     @Autowired
     private BatchItemProcessor itemProcessor;
@@ -63,8 +63,13 @@ public class ChunkJobConfig {
 
     @Bean
     public Step easyChunk() {
-        return new StepBuilder("easyChunk", jobRepository).chunk(1, transactionManager).reader(itemReader)
-                .processor(itemProcessor).writer(itemWriter).listener(chunkListener).build();
+        return new StepBuilder("easyChunk", jobRepository)
+                .chunk(1, transactionManager)
+                .reader(itemReader)
+                .processor(itemProcessor)
+                .writer(itemWriter)
+                .listener(chunkListener)
+                .build();
     }
 
     private Tasklet printTask() {

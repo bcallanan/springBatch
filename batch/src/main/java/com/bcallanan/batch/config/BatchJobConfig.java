@@ -47,13 +47,17 @@ public class BatchJobConfig {
 
     @Bean("printJob")
     public Job printJob() {
-        return new JobBuilder("printJob", jobRepository).listener(batchJobExecutionListener).start(easyStep())
+        return new JobBuilder("printJob", jobRepository)
+                .listener(batchJobExecutionListener)
+                .start(easyStep())
                 .next(nextStep()).build();
     }
 
     @Bean
     public Step easyStep() {
-        return new StepBuilder("easy", jobRepository).listener(stepListener).tasklet(printTask(), transactionManager)
+        return new StepBuilder("easy", jobRepository)
+                .listener(stepListener)
+                .tasklet(printTask(), transactionManager)
                 .build();
     }
 

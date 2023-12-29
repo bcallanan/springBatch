@@ -27,11 +27,8 @@ public class JobLaunchController {
 
     @Autowired
     private JobOperator jobOperator;
-
-//	@Autowired
-//	private JobOperator chunkJobOperator;
-
     @PostMapping(value = "/job")
+    
     public void handle(@RequestBody BatchJob batchJob) throws Exception {
 
         String name = "Job_run:" + System.currentTimeMillis();
